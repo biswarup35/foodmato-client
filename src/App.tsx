@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import { Container, Stack, useMediaQuery, Theme } from "@mui/material";
+import { useGetRestaurantsQuery } from "./services/restaurantsApi";
+import Filter from "./components/Filter";
+import Main from "./components/views/Main";
+import FrequentlyOrdered from "./components/views/FrequentlyOrdered";
 
 function App() {
+  const { data } = useGetRestaurantsQuery(
+    {},
+    {
+      refetchOnMountOrArgChange: true,
+    }
+  );
+  const mdUp = useMediaQuery<Theme>((theme) => theme.breakpoints.up("md"));
+
+  React.useEffect(() => {
+    console.table(data);
+  }, [data]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {/* Frequently Ordered section */}
+      <FrequentlyOrdered />
+      <Container id="container">
+        <Stack direction="row">
+          {mdUp && <Filter />}
+          <Main data={data} />
+        </Stack>
+      </Container>
     </div>
   );
 }
