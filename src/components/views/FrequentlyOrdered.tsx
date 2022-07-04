@@ -12,7 +12,7 @@ import CardContainer from "../CardContainer";
 
 const FrequentlyOrdered = () => {
   const sliderRef = React.useRef<HTMLDivElement>(null);
-  const { data } = useGetRestaurantsQuery({});
+  const { data } = useGetRestaurantsQuery("?rating_gte=4");
   const handleScrollLeft = React.useCallback(() => {
     if (sliderRef.current) {
       sliderRef.current.scroll({

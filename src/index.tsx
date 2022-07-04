@@ -5,7 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { Provider } from "react-redux";
-import store from "./app/store";
+import { store } from "./app/store";
+import FilterProvider from "./components/context/FilterContect";
 
 declare module "@mui/material/styles" {
   interface Theme {
@@ -47,7 +48,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <App />
+        <FilterProvider>
+          <App />
+        </FilterProvider>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>

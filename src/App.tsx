@@ -4,19 +4,20 @@ import { useGetRestaurantsQuery } from "./services/restaurantsApi";
 import Filter from "./components/Filter";
 import Main from "./components/views/Main";
 import FrequentlyOrdered from "./components/views/FrequentlyOrdered";
+import { useAppSelector } from "./app/hooks";
+import useMakeQueryString from "./hooks/useMakeQueryString";
 
 function App() {
-  const { data } = useGetRestaurantsQuery(
-    {},
-    {
-      refetchOnMountOrArgChange: true,
-    }
-  );
+  const filter = useAppSelector((state) => state.filter);
+  const param = useMakeQueryString(filter);
+  const { data } = useGetRestaurantsQuery(param, {
+    refetchOnMountOrArgChange: true,
+  });
   const mdUp = useMediaQuery<Theme>((theme) => theme.breakpoints.up("md"));
 
   React.useEffect(() => {
-    console.table(data);
-  }, [data]);
+    console.log("Filters", filter);
+  }, [filter]);
   return (
     <div>
       {/* Frequently Ordered section */}

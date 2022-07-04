@@ -7,7 +7,7 @@ export const restaurantsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
     getRestaurants: builder.query<Restaurants[], {}>({
-      query: () => `${baseUrl}/restaurants`,
+      query: (param: string) => `${baseUrl}/restaurants${param}`,
     }),
   }),
 });

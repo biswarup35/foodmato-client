@@ -1,5 +1,6 @@
 import { Box, Typography, Button, Toolbar } from "@mui/material";
-import PermanentLeftDrawer from "./views/PermanentLeftDrawer";
+import PermanentDrawer from "./PermanentDrawer";
+import DrawerContents from "./views/DrawerContents";
 
 const Filter = () => {
   return (
@@ -28,7 +29,9 @@ const Filter = () => {
           Reset all
         </Button>
       </Toolbar>
-      <PermanentLeftDrawer />
+      <PermanentDrawer>
+        <DrawerContents />
+      </PermanentDrawer>
     </Box>
   );
 };
