@@ -10,6 +10,7 @@ import {
   Chip,
   Box,
 } from "@mui/material";
+import VegIcon from "../icons/VegNonVegIcon";
 
 type Props = Partial<Omit<Restaurants, "id" | "format" | "occasion">>;
 
@@ -26,6 +27,7 @@ const Card: FC<Props> = ({
   totalRatings = 0,
   type = [],
 }) => {
+  const [veg, nonVeg] = type;
   return (
     <MuiCard variant="outlined" sx={{ width: "100%" }}>
       <CardMedia
@@ -54,6 +56,8 @@ const Card: FC<Props> = ({
           <Typography variant="body2" color="text.secondary" sx={{ flex: 1 }}>
             {`${totalRatings} Ratings`}
           </Typography>
+          {veg && <VegIcon color="green" />}
+          {nonVeg && <VegIcon color="red" />}
         </Box>
       </CardContent>
     </MuiCard>
